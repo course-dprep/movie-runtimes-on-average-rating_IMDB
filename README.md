@@ -11,13 +11,13 @@ To find this out, we are using imdb.com data to inspect the run time of movies a
 Insert later: program(s) used, type of analysis, what did we do to clean and merge data
 
 ## __Repository overview__
-├── README.md
-├── data
-├── gen
+├── README.md <br>
+├── data <br>
+├── gen <br>
 │   ├── analysis
 │   ├── data-preparation
 │   └── paper
-└── src
+└── src <br>
     ├── analysis
     ├── data-preparation
     └── paper
