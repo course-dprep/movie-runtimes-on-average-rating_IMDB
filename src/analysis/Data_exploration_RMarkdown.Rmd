@@ -16,6 +16,21 @@ download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings
 title_ratings <- read_tsv("title_ratings.tsv", n_max = 100)
 ```
 
+15-rmarkdown-for-missing-values-how-to-remove-them
+```{r remove_NA}
+# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
+library(dplyr)
+title_basics <- title_basics %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes"))
+
+# Search for missing values for averageRating in title_ratings and remove them if that is the case
+if (any(is.na(title_ratings$averageRating))){
+  # If missing values for averageRating are found, remove them
+  title_ratings <- title_ratings %>% drop_na("averageRating")
+} else {
+  # If no NA values exist, do nothing
+}
+```
+
 ## Generating plots
 ```{r plots}
 
@@ -94,3 +109,4 @@ mean(title_ratings$averageRating)
 median(title_ratings$averageRating)
 ```
 Looking at the output, the range for 'averageRating' is 1-10. 
+master
