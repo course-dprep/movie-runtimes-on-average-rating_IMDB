@@ -16,6 +16,7 @@ download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings
 title_ratings <- read_tsv("title_ratings.tsv", n_max = 100)
 ```
 
+15-rmarkdown-for-missing-values-how-to-remove-them
 ```{r remove_NA}
 # Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
 library(dplyr)
@@ -30,3 +31,82 @@ if (any(is.na(title_ratings$averageRating))){
 }
 ```
 
+## Generating plots
+```{r plots}
+
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Summary of relevant variables
+
+We are going to be looking at three different variables:
+
+- **runtimeMinutes** from the title_basics dataset
+
+- **titleType** from the title_basics dataset, as we will specificially look at movies later on. 
+
+- **averageRating** from the title_ratings dataset. 
+
+
+```{r download datasets, include = FALSE}
+
+# Download dataset 1
+download.file('https://datasets.imdbws.com/title.basics.tsv.gz', "title_basics.tsv")
+library(tidyverse)
+title_basics <- read_tsv("title_basics.tsv")
+View(title_basics)
+
+# Download dataset 2
+download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings.tsv")
+title_ratings <- read_tsv("title_ratings.tsv")
+View(title_ratings)
+```
+
+### titleType
+
+First of all, the different types of titles are explored. This variable refers to the type/format of the title (e.g. movie, short, tvseries, tvepisode, video etc). 
+
+```{r Summary statistics for titletype, include = TRUE}
+
+summary(title_basics$titleType)
+head(title_basics$titleType)
+tail(title_basics$titleType)
+table(title_basics$titleType)
+
+```
+As can be read from the output, there are 11 different types of titles. For the type 'movie', there are 657053 observations.
+
+### RuntimeMinutes 
+
+Second of all, the run time in minutes is explored. As the name suggests, this variable refers to the primary run time of the title, in minutes. 
+
+```{r Summary statistics for RuntimeMinutes, include = TRUE}
+
+summary(title_basics$runtimeMinutes)
+head(title_basics$runtimeMinutes)
+tail(title_basics$runtimeMinutes)
+min(title_basics$runtimeMinutes)
+max(title_basics$runtimeMinutes)
+
+title_basics %>%
+  group_by(runtimeMinutes) %>%
+  count("\\N")
+
+```
+The min and max function show that there needs to be some data cleaning done.The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7210734 missing values. 
+
+### Average Rating 
+
+Lastly, the variable 'averageRating' is explored, which can be found in the 'title_ratings' dataset. The average rating is the weighted average of all individual user ratings. 
+
+```{r Summary statistics for AverageRating, include = TRUE}
+
+summary(title_ratings$averageRating)
+head(title_ratings$averageRating)
+tail(title_ratings$averageRating)
+mean(title_ratings$averageRating)
+median(title_ratings$averageRating)
+```
+Looking at the output, the range for 'averageRating' is 1-10. 
+master

@@ -4,7 +4,7 @@ output: html_document
 date: "2023-09-17"
 ---
 
-```{r downloading_data, eval=FALSE}
+```{r downloading_data, eval=FALSE, echo=FALSE}
 download.file('https://datasets.imdbws.com/title.basics.tsv.gz', "title_basics.tsv")
 library(tidyverse)
 title_basics <- read_tsv("title_basics.tsv", n_max = 100)
@@ -15,9 +15,19 @@ View(title_basics)
 download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings.tsv")
 title_ratings <- read_tsv("title_ratings.tsv", n_max = 100)
 ```
+## Generating tables
+```{r tables, echo=False}
+table(title_ratings$averageRating)
+table(title_basics$runtimeMinutes)
+table(title_ratings$averageRating, title_basics$runtimeMinutes)
+
+```
+
 
 ## Generating plots
-```{r plots}
+```{r plots, echo=FALSE}
+plot(x=title_basics$runtimeMinutes, y=title_ratings$averageRating)
+plot(x=title_basics$runtimeMinutes, y=title_ratings$numVotes)
 
 ```
 
