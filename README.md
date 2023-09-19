@@ -14,13 +14,13 @@ Insert later: program(s) used, type of analysis, what did we do to clean and mer
 ├── README.md <br>
 ├── data <br>
 ├── gen <br>
-│   ├── analysis
-│   ├── data-preparation
-│   └── paper
+│   ├── analysis <br>
+│   ├── data-preparation <br>
+│   └── paper <br>
 └── src <br>
-    ├── analysis
-    ├── data-preparation
-    └── paper
+    ├── analysis <br>
+    ├── data-preparation <br>
+    └── paper <br>
 
 ## __Running instructions__
 Insert later
