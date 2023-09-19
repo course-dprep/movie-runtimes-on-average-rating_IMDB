@@ -1,0 +1,32 @@
+---
+title: "Data exploration"
+output: html_document
+date: "2023-09-17"
+---
+
+```{r downloading_data, eval=FALSE}
+download.file('https://datasets.imdbws.com/title.basics.tsv.gz', "title_basics.tsv")
+library(tidyverse)
+title_basics <- read_tsv("title_basics.tsv", n_max = 100)
+View(title_basics)
+
+# Download dataset 2
+# dir.create('./data/dataset2')  # Uncomment if need to create directory with R
+download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings.tsv")
+title_ratings <- read_tsv("title_ratings.tsv", n_max = 100)
+```
+
+```{r remove_NA}
+# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
+library(dplyr)
+title_basics <- title_basics %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes"))
+
+# Search for missing values for averageRating in title_ratings and remove them if that is the case
+if (any(is.na(title_ratings$averageRating))){
+  # If missing values for averageRating are found, remove them
+  title_ratings <- title_ratings %>% drop_na("averageRating")
+} else {
+  # If no NA values exist, do nothing
+}
+```
+
