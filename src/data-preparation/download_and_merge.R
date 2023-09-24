@@ -14,8 +14,8 @@ download_data <- function(url, filename, filepath) {
 }
 
 #Use the function to download the datasets from IMDB
-download_data(url = "https://datasets.imdbws.com/title.basics.tsv.gz", filename = "title_basics.tsv", filepath = "./data")
-download_data(url = "https://datasets.imdbws.com/title.ratings.tsv.gz", filename = "title_ratings.tsv", filepath = "./data")
+download_data(url = "https://datasets.imdbws.com/title.basics.tsv.gz", filename = "title_basics.tsv", filepath = "./src")
+download_data(url = "https://datasets.imdbws.com/title.ratings.tsv.gz", filename = "title_ratings.tsv", filepath = "./src")
 
 #Load the data
 title_basics <- read_tsv("./src/title_basics.tsv")
@@ -47,3 +47,28 @@ combined_data <- combined_data %>%
     averageRating = as.numeric(averageRating),
     numVotes = as.integer(numVotes)
   )
+
+# Add new variable, whether a movie is classified as "short" or "long"
+average_runtime <- mean(combined_data$runtimeMinutes, na.rm = TRUE)
+
+combined_data <- combined_data %>%
+  mutate(
+    runtime_long_short = ifelse(runtimeMinutes > average_runtime, "long", "short")
+  )
+
+# Add a new variable, to standardize the ratings
+mean_rating <- mean(combined_data$averageRating, na.rm = TRUE)
+sd_rating <- sd(combined_data$averageRating, na.rm = TRUE)
+
+rating_standardized <- (combined_data$averageRating - mean_rating) / sd_rating
+
+combined_data <- combined_data %>%
+  mutate(
+    rating_standardized = round(rating_standardized, digits = 3)
+  )
+
+
+
+
+
+
