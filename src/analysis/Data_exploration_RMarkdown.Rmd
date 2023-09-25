@@ -110,3 +110,18 @@ median(title_ratings$averageRating)
 ```
 Looking at the output, the range for 'averageRating' is 1-10. 
 master
+
+## Generating tables
+```{r tables, echo=False}
+table(title_ratings$averageRating)
+table(title_basics$runtimeMinutes)
+table(title_ratings$averageRating, title_basics$runtimeMinutes)
+
+```
+
+
+## Generating plots
+```{r plots, echo=FALSE}
+plot(x=title_basics$runtimeMinutes, y=title_ratings$averageRating)
+plot(x=title_basics$runtimeMinutes, y=title_ratings$numVotes)
+

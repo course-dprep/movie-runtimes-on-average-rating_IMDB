@@ -18,18 +18,18 @@ download_data(url = "https://datasets.imdbws.com/title.basics.tsv.gz", filename 
 download_data(url = "https://datasets.imdbws.com/title.ratings.tsv.gz", filename = "title_ratings.tsv", filepath = "./data")
 
 #Load the data
-title_basics <- read_tsv("./src/title_basics.tsv")
-title_ratings <- read_tsv("./src/title_ratings.tsv")
+title_basics <- read_tsv("./data/title_basics.tsv")
+title_ratings <- read_tsv("./data/title_ratings.tsv")
 
 #Filter title_basics by movie and create a new variable movie_basics
 movies_basics <- title_basics %>% filter(titleType == "movie")
 
 # Inspect data
-head(title_basics)
+head(movies_basics)
 head(title_ratings)
 
 # Remove endYear as there is no data in this column
-title_basics <- title_basics %>%
+movies_basics <- movies_basics %>%
   select(-endYear)
 
 # Combine data by tconst and rename tconst into title_id
