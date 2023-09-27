@@ -9,4 +9,4 @@ title_ratings <- read_tsv("../../data/dataset2/title_ratings.tsv")
 combined_data <- left_join(title_basics, title_ratings, by = "tconst")
 
 # Save merged data
-save(combined_data,file="../../gen/data-preparation/temp/data_merged.RData")
+save(combined_data,file="../../gen/data-preparation/temp/data_merged.csv")
