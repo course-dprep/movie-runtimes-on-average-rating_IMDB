@@ -1,7 +1,8 @@
+#Setup 
 library(dplyr)
 library(tidyverse)
 
-# Load merged data 
+# Input: Load merged data 
 load("../../gen/data-preparation/temp/data_merged.RData")
 
 # Filter title_basics by movie and create a new variable movie_basics
@@ -30,6 +31,9 @@ data_cleaned <- data_cleaned %>%
 #Remove NAs
 data_cleaned <- data_cleaned %>%
   drop_na()
+
+#Remove duplicates 
+data_cleaned <- data_cleaned %>% filter(!duplicated(data_cleaned))
 
 # Save cleaned data
 save(data_cleaned,file="../../gen/data-preparation/output/data_cleaned.RData")
