@@ -2,10 +2,10 @@
 library(dplyr)
 library(tidyverse)
 
-# Input: Load merged data 
-load("../../gen/data-preparation/temp/data_merged.RData")
+# Load merged data 
+load("../../gen/data-preparation/temp/data_merged.csv")
 
-# Filter title_basics by movie and create a new variable movie_basics
+# Filter title_basics by movie and create a new variable data_cleaned
 data_cleaned <- combined_data %>% 
   filter(titleType == "movie")
 
@@ -49,6 +49,5 @@ data_cleaned <- data_cleaned %>%
 #Remove duplicates 
 data_cleaned <- data_cleaned %>% filter(!duplicated(data_cleaned))
 
-
 # Save cleaned data
-save(data_cleaned,file="../../gen/data-preparation/output/data_cleaned.RData")
+save(data_cleaned,file="../../gen/data-preparation/temp/data_cleaned.csv")
