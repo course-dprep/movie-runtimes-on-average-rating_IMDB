@@ -1,7 +1,14 @@
+## SETUP
+library(dplyr)
+
+## INPUT
+read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
+
+## TRANSFORMATION
 ## Linear regression
 # Research question: What is the relationship between the runtime and average user rating for movies?
-lm1 <- lm(averageRating ~ runtimeMinutes , mergeddata)
-# Correct data file name needed in lm function!
+imdb_lm1 <- lm(averageRating ~ runtimeMinutes , data_cleaned)
 
-# Save data
-save(lm1,file="./gen/analysis/output/model_results.R")
+## OUTPUT
+# Save output
+save(imdb_lm1,file="../../gen/analysis/output/model_results.R")
