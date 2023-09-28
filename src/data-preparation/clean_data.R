@@ -32,8 +32,23 @@ data_cleaned <- data_cleaned %>%
 data_cleaned <- data_cleaned %>%
   drop_na()
 
+# Add new variable that shows whether a movie is classified as "short" or "long" based on average runtime
+average_runtime <- mean(data_cleaned$runtimeMinutes, na.rm = TRUE)
+
+data_cleaned <- data_cleaned %>%
+  mutate(runtime_long_short = ifelse(runtimeMinutes > average_runtime, "long", "short"))
+
+# Add new variable that shows a standardized version of the average ratings
+mean_rating <- mean(data_cleaned$averageRating, na.rm = TRUE)
+sd_rating <- sd(data_cleaned$averageRating, na.rm = TRUE)
+rating_standardized <- (data_cleaned$averageRating - mean_rating) / sd_rating
+
+data_cleaned <- data_cleaned %>%
+  mutate(rating_standardized = round(rating_standardized, digits = 3))
+
 #Remove duplicates 
 data_cleaned <- data_cleaned %>% filter(!duplicated(data_cleaned))
+
 
 # Save cleaned data
 save(data_cleaned,file="../../gen/data-preparation/output/data_cleaned.RData")
