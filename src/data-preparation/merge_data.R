@@ -1,9 +1,16 @@
-# Load datasets into R 
-df1 <- read.csv("./gen/data-preparation/input/dataset1.csv")
-df2 <- read.csv("./gen/data-preparation/input/dataset2.csv")
+## SETUP
+library(dplyr)
+library(tidyverse)
 
-# Merge on id
-df_merged <- merge(df1,df2,by="id")
+## INPUT
+#Load the data into R
+title_basics <- read_tsv("../../data/dataset/title_basics.tsv")
+title_ratings <- read_tsv("../../data/dataset/title_ratings.tsv")
 
+## TRANSFORMATION
+# Combine data by tconst 
+combined_data <- left_join(title_basics, title_ratings, by = "tconst")
+
+## OUTPUT
 # Save merged data
-save(df_merged,file="./gen/data-preparation/temp/data_merged.RData")
+write_csv(combined_data,file="../../gen/data-preparation/temp/data_merged.csv")

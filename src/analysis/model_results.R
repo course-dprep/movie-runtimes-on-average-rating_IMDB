@@ -1,14 +1,18 @@
-# Load merged data 
-load()
 
-# Assumption check: test for homoskedasticity
+## SETUP
+library(dplyr)
 library(car)
-leveneTest(averageRating ~ runtimeMinutes, mergeddata, center=mean) # significant p-value means violated assumption of homoskedasticity
 
+## INPUT
+read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
+
+## TRANSFORMATION
 ## Linear regression
 # Research question: What is the relationship between the runtime and average user rating for movies?
-lm1 <- lm(averageRating ~ runtimeMinutes , mergeddata)
-# Correct data file name needed in lm function!
+imdb_lm1 <- lm(averageRating ~ runtimeMinutes , data_cleaned)
+
+# Assumption check: test for homoskedasticity
+leveneTest(averageRating ~ runtimeMinutes, mergeddata, center=mean) # significant p-value means violated assumption of homoskedasticity
 
 # Assumption check: test for independence of observations
 dwtest(lm1) # a value near 2 suggests independence
@@ -19,5 +23,6 @@ shapiro.test(lm1$residuals) # assumption of normality is violated if p-value is 
 # Assumption check: test for linearity
 plot(lm1, which = 1)
 
-# Save data
-save(lm1,file="./gen/analysis/output/model_results.R")
+## OUTPUT
+# Save output
+save(imdb_lm1,file="../../gen/analysis/output/model_results.R")

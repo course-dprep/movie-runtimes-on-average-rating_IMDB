@@ -22,6 +22,16 @@ Insert later: program(s) used, type of analysis, what did we do to clean and mer
     ├── data-preparation <br>
     └── paper <br>
 
+## __Prerequisites__
+- R [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
+- Make [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
+
+For R, the following packages are used:
+```
+install.packages(dplyr)
+install.packages(tidyverse)
+```
+
 ## __Running instructions__
 Insert later
 

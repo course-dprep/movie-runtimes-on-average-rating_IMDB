@@ -4,19 +4,12 @@ output: html_document
 date: "2023-09-17"
 ---
 
-```{r downloading_data, eval=FALSE}
-download.file('https://datasets.imdbws.com/title.basics.tsv.gz', "title_basics.tsv")
-library(tidyverse)
-title_basics <- read_tsv("title_basics.tsv", n_max = 100)
-View(title_basics)
-
-# Download dataset 2
-# dir.create('./data/dataset2')  # Uncomment if need to create directory with R
-download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings.tsv")
-title_ratings <- read_tsv("title_ratings.tsv", n_max = 100)
+```{r importing_data, echo=FALSE}
+# download cleaned data
+read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 ```
 
-15-rmarkdown-for-missing-values-how-to-remove-them
+
 ```{r remove_NA}
 # Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
 library(dplyr)
@@ -31,13 +24,6 @@ if (any(is.na(title_ratings$averageRating))){
 }
 ```
 
-## Generating plots
-```{r plots}
-
-```
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 ## Summary of relevant variables
 
 We are going to be looking at three different variables:
@@ -48,20 +34,6 @@ We are going to be looking at three different variables:
 
 - **averageRating** from the title_ratings dataset. 
 
-
-```{r download datasets, include = FALSE}
-
-# Download dataset 1
-download.file('https://datasets.imdbws.com/title.basics.tsv.gz', "title_basics.tsv")
-library(tidyverse)
-title_basics <- read_tsv("title_basics.tsv")
-View(title_basics)
-
-# Download dataset 2
-download.file('https://datasets.imdbws.com/title.ratings.tsv.gz', "title_ratings.tsv")
-title_ratings <- read_tsv("title_ratings.tsv")
-View(title_ratings)
-```
 
 ### titleType
 
@@ -110,3 +82,18 @@ median(title_ratings$averageRating)
 ```
 Looking at the output, the range for 'averageRating' is 1-10. 
 master
+
+## Generating tables
+```{r tables, echo=False}
+table(title_ratings$averageRating)
+table(title_basics$runtimeMinutes)
+table(title_ratings$averageRating, title_basics$runtimeMinutes)
+
+```
+
+
+## Generating plots
+```{r plots, echo=FALSE}
+plot(x=title_basics$runtimeMinutes, y=title_ratings$averageRating)
+plot(x=title_basics$runtimeMinutes, y=title_ratings$numVotes)
+
