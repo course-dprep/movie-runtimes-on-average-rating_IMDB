@@ -39,8 +39,7 @@ Insert later
 Optional
 
 ## __About__
-Thank you for your interest in our project! This project is part of our 'Data Preparation & Workflow Management' course at Tilburg University. The contributors are:
-Team 1
+Thank you for your interest in our project! This project is part of our 'Data Preparation & Workflow Management' course at Tilburg University. The contributors are part of team 1, which consists of:
 - Lindsey Coover (l.e.coover@tilburguniversity.edu)
 - Renée Minten (r.c.c.minten@tilburguniversity.edu)
 - Marlie Snoeijen (m.p.c.snoeijen@tilburguniversity.edu) 
