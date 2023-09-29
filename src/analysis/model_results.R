@@ -1,7 +1,7 @@
-library(lmtest)
 ## SETUP
 library(dplyr)
 library(car)
+library(lmtest)
 
 ## INPUT
 read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
@@ -17,10 +17,10 @@ breuschpagan_test <- lm(averageRating ~ runtimeMinutes, data = data_cleaned) %>%
 breuschpagan_test
 
 # Assumption check: test for independence of observations
-dwtest(lm1) # a value near 2 suggests independence
+dwtest(imdb_lm1) # a value near 2 suggests independence
 
 # Assumption check: test for normality
-shapiro.test(lm1$residuals) # assumption of normality is violated if p-value is significant
+qqnorm(data_cleaned$averageRating) # relatively straight line indicates normality
 
 # Assumption check: test for linearity
 plot(lm1, which = 1)
