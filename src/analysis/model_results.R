@@ -23,7 +23,7 @@ dwtest(imdb_lm1) # a value near 2 suggests independence
 qqnorm(data_cleaned$averageRating) # relatively straight line indicates normality
 
 # Assumption check: test for linearity
-plot(lm1, which = 1)
+plot(data_cleaned$runtimeMinutes, data_cleaned$averageRating, xlab = "Runtime Minutes", ylab = "Average Rating", main = "Scatterplot of Average Rating vs. Runtime Minutes")
 
 ## OUTPUT
 # Save output
