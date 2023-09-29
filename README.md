@@ -24,7 +24,7 @@ Insert later: program(s) used, type of analysis, what did we do to clean and mer
 
 ## __Prerequisites__
 - R [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
-- Make
+- Make [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
 
 For R, the following packages are used:
 ```
