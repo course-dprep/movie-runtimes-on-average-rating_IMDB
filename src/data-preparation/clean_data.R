@@ -30,16 +30,8 @@ data_cleaned <- data_cleaned %>%
     numVotes = as.integer(numVotes)
   )
 
-# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
-title_basics <- title_basics %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes"))
-
-# Search for missing values for averageRating in title_ratings and remove them if that is the case
-if (any(is.na(title_ratings$averageRating))){
-  # If missing values for averageRating are found, remove them
-  title_ratings <- title_ratings %>% drop_na("averageRating")
-} else {
-  # If no missing values for averageRating are found, do nothing
-}
+# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle, runtimeMinutes and averageRating
+data_cleaned <- data_cleaned %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes", "averageRating"))
 
 # Add new variable that shows whether a movie is classified as "short" or "long" based on average runtime
 average_runtime <- mean(data_cleaned$runtimeMinutes, na.rm = TRUE)
