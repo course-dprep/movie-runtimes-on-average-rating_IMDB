@@ -1,4 +1,4 @@
-# **Project title**
+# **IMDB - the impact of runtime on average rating**
 
 *What is the relationship between the runtime and the average user rating for movies?*
 
