@@ -4,7 +4,7 @@ library(tidyverse)
 
 ## INPUT
 # Load merged data 
-read_csv("../../gen/data-preparation/temp/data_merged.csv")
+combined_data <- read_csv("../../gen/data-preparation/temp/data_merged.csv")
 
 ## TRANSFORMATION
 # Filter title_basics by movie and create a new variable data_cleaned
