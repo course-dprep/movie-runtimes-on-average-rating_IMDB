@@ -5,10 +5,24 @@
 ## __Motivation__
 Movies have a range of different runtimes. The longest movie ever made was over 35 days long (Lyon, 2023), while one of the shortest movies ever made was only 100 seconds long (Acuna, 2014). Even though these movies are definitley exceptions when it comes to runtimes, it does show the big range that exists in the movie industry. According to Follows (2021) "half of all Hollywood movies are between 96 and 120 minutes long, with the most popular running time being 101 minutes". 
 
-We want to know if the length of the movie runtime influences peoples opinion (average rating) about the movie. The results of this project can give useful insights to, for example, movie production companies and streaming services, into how the run times of their movies affect ratings, and likely, the popularity and profitability of their movies.    
+__Relevance__
+
+We want to know if the length of the movie runtime influences peoples opinion (average rating) about the movie. The results of this project can give useful insights to, for example, movie production companies and streaming services, into how the run times of their movies affect ratings, and with that likely, the popularity and profitability of their movies.    
 
 ## __Method and results__
-To find this out, we are using imdb.com data to inspect the run time of movies and their average ratings. 
+For this research, the research question *What is the relationship between the runtime and the average user rating for movies?* was formulated. 
+
+To answer this question we make use of imdb.com data, in specific the datasets 'title_basics.tsv' and 'title_ratings.tsv', which were downloaded from the following website: https://datasets.imdbws.com. 
+The variables that were used, were the following:
+
+| Variable       | Description |
+|------------|-----|
+| titleType | the type/format of the title (e.g. movie, sohrt, tvseries, tvepisode, video, etc.  |
+| primaryTitle   | the more popular title/the title used by the filmmakers on promotional material at the point of release  |
+| runtimeMinutes | primary runtime of the title, in minutes |
+| averageRating | weighted average of all the indidivual user ratings |
+
+
 Insert later: program(s) used, type of analysis, what did we do to clean and merge data
 
 ## __Repository overview__
