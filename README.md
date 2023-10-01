@@ -3,8 +3,9 @@
 *What is the relationship between the runtime and the average user rating for movies?*
 
 ## __Motivation__
-Hi there! Welcome to our GitHub repository. 
-Movies have all different run times. Some are really long, some are "short". We want to know if this actually influences peoples opinion about the movies. With doing this, we want to contribute to marketing insights into the effects of run times on people's average ratings of movies. The results of this project can give useful insights to movie producers into how the run times of their movies affect their ratings, and hence, the profitability of their movies. 
+Movies have a range of different runtimes. The longest movie ever made was over 35 days long (Lyon, 2023), while one of the shortest movies ever made was only 100 seconds long (Acuna, 2014). Even though these movies are definitley exceptions when it comes to runtimes, it does show the big range that exists in the movie industry. According to Follows (2021) "half of all Hollywood movies are between 96 and 120 minutes long, with the most popular running time being 101 minutes". 
+
+We want to know if the length of the movie runtime influences peoples opinion (average rating) about the movie. The results of this project can give useful insights to, for example, movie production companies and streaming services, into how the run times of their movies affect ratings, and likely, the popularity and profitability of their movies.    
 
 ## __Method and results__
 To find this out, we are using imdb.com data to inspect the run time of movies and their average ratings. 
