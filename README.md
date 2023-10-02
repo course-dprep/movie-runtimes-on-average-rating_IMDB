@@ -12,7 +12,7 @@ We want to know if the length of the movie runtime influences peoples opinion (a
 ## __Method and results__
 For this research, the research question *What is the relationship between the runtime and the average user rating for movies?* was formulated. 
 
-To answer this question we make use of imdb.com data, in specific the datasets 'title_basics.tsv' and 'title_ratings.tsv', which were downloaded from the following website: https://datasets.imdbws.com. 
+To answer this question we make use of data from imdb.com, in specific the datasets 'title_basics.tsv' and 'title_ratings.tsv', which were downloaded from the following website: https://datasets.imdbws.com. 
 The variables that were used, were the following:
 
 | Variable       | Description |
@@ -22,6 +22,7 @@ The variables that were used, were the following:
 | runtimeMinutes | primary runtime of the title, in minutes |
 | averageRating | weighted average of all the indidivual user ratings |
 
+To analyse the data the program Rstudio was used. After downloading the data into Rstudio the two datasets were merged into one dataset, 'data_merged.csv'. This merged dataset was used when cleaning our data. After cleaning the data a data exploration was done using a Rmarkdown file. Lastly the data was analysed using a linear regression.  
 
 Insert later: program(s) used, type of analysis, what did we do to clean and merge data
 
