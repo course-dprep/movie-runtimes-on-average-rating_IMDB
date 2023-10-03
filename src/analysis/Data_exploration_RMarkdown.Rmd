@@ -3,29 +3,19 @@ title: "Data exploration"
 output: html_document
 date: "2023-09-17"
 ---
+In this document, we will explore the data of two IMDB datasets, to answer our research question: 'Does the run time of movies influence the average rating of that movie?'
 
-```{r importing_data, echo=FALSE}
-# download cleaned data
-read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
-```
-
-
-```{r remove_NA}
-# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
+```{r importing_data, eval=TRUE, echo=FALSE}
+# load the two separate datasets
+library(tidyverse)
 library(dplyr)
-title_basics <- title_basics %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes"))
 
-# Search for missing values for averageRating in title_ratings and remove them if that is the case
-if (any(is.na(title_ratings$averageRating))){
-  # If missing values for averageRating are found, remove them
-  title_ratings <- title_ratings %>% drop_na("averageRating")
-} else {
-  # If no NA values exist, do nothing
-}
+title_basics <- read_tsv("../../data/dataset/title_basics.tsv")
+title_ratings <- read_tsv("../../data/dataset/title_ratings.tsv")
+
 ```
 
 ## Summary of relevant variables
-
 We are going to be looking at three different variables:
 
 - **runtimeMinutes** from the title_basics dataset
@@ -81,19 +71,8 @@ mean(title_ratings$averageRating)
 median(title_ratings$averageRating)
 ```
 Looking at the output, the range for 'averageRating' is 1-10. 
-master
-
-## Generating tables
-```{r tables, echo=False}
-table(title_ratings$averageRating)
-table(title_basics$runtimeMinutes)
-table(title_ratings$averageRating, title_basics$runtimeMinutes)
-
-```
-
 
 ## Generating plots
 ```{r plots, echo=FALSE}
 plot(x=title_basics$runtimeMinutes, y=title_ratings$averageRating)
 plot(x=title_basics$runtimeMinutes, y=title_ratings$numVotes)
-
