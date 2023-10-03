@@ -94,6 +94,9 @@ table(title_ratings$averageRating, title_basics$runtimeMinutes)
 
 ## Generating plots
 ```{r plots, echo=FALSE}
+boxplot(data_cleaned$runtimeMinutes)
+boxplot(data_cleaned$numVotes)'
 plot(x=title_basics$runtimeMinutes, y=title_ratings$averageRating)
 plot(x=title_basics$runtimeMinutes, y=title_ratings$numVotes)
+
 

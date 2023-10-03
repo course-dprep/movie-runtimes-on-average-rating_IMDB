@@ -50,6 +50,12 @@ data_cleaned <- data_cleaned %>%
 #Remove duplicates 
 data_cleaned <- data_cleaned %>% filter(!duplicated(data_cleaned))
 
+# No need to reshape variables in the dataset
+
+# Remove outliers in relevant variables
+threshold <- 30000
+data_cleaned <- data_cleaned %>% filter(data_cleaned$runtimeMinutes < threshold)
+
 ## OUTPUT
 # Save cleaned data
 write_csv(data_cleaned,file="../../gen/data-preparation/temp/data_cleaned.csv")
