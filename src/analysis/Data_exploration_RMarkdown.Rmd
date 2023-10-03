@@ -56,7 +56,7 @@ title_basics %>%
   count("\\N")
 
 ```
-The min and max function show that there needs to be some data cleaning done.The output returns 'character' as the data tpe of 'runtimeMinutes', while numeric makes more sense. The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7144426 missing values. 
+The min and max function show that there needs to be some data cleaning done.The output returns 'character' as the data type of 'runtimeMinutes', while numeric makes more sense. The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7144426 missing values. 
 
 ### Average Rating 
 
