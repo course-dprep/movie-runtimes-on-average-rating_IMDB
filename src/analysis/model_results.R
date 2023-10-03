@@ -4,7 +4,7 @@ library(dplyr)
 library(car)
 
 ## INPUT
-read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
+data_cleaned <- read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 
 ## TRANSFORMATION
 ## Linear regression
@@ -12,7 +12,7 @@ read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 imdb_lm1 <- lm(averageRating ~ runtimeMinutes , data_cleaned)
 
 # Assumption check: test for homoskedasticity
-leveneTest(averageRating ~ runtimeMinutes, mergeddata, center=mean) # significant p-value means violated assumption of homoskedasticity
+leveneTest(averageRating ~ runtimeMinutes, data_cleaned, center=mean) # significant p-value means violated assumption of homoskedasticity
 
 # Assumption check: test for independence of observations
 dwtest(lm1) # a value near 2 suggests independence
