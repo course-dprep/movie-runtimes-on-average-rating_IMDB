@@ -3,29 +3,19 @@ title: "Data exploration"
 output: html_document
 date: "2023-09-17"
 ---
+In this document, we will explore the data of two IMDB datasets, to answer our research question: 'Does the run time of movies influence the average rating of that movie?'
 
-```{r importing_data, echo=FALSE}
-# download cleaned data
-read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
-```
-
-
-```{r remove_NA}
-# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle and runtimeMinutes in title_basics
+```{r importing_data, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+# load the two separate datasets
+library(tidyverse)
 library(dplyr)
-title_basics <- title_basics %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes"))
 
-# Search for missing values for averageRating in title_ratings and remove them if that is the case
-if (any(is.na(title_ratings$averageRating))){
-  # If missing values for averageRating are found, remove them
-  title_ratings <- title_ratings %>% drop_na("averageRating")
-} else {
-  # If no NA values exist, do nothing
-}
+title_basics <- read_tsv("../../data/dataset/title_basics.tsv")
+title_ratings <- read_tsv("../../data/dataset/title_ratings.tsv")
+
 ```
 
 ## Summary of relevant variables
-
 We are going to be looking at three different variables:
 
 - **runtimeMinutes** from the title_basics dataset
@@ -47,11 +37,11 @@ tail(title_basics$titleType)
 table(title_basics$titleType)
 
 ```
-As can be read from the output, there are 11 different types of titles. For the type 'movie', there are 657053 observations.
+As can be read from the output, there are 11 different types of titles. For the type 'movie', there are 658476 observations.
 
 ### RuntimeMinutes 
 
-Second of all, the run time in minutes is explored. As the name suggests, this variable refers to the primary run time of the title, in minutes. 
+Second of all, the run time is explored. As the name suggests, this variable refers to the primary run time of the title, in minutes.
 
 ```{r Summary statistics for RuntimeMinutes, include = TRUE}
 
@@ -66,7 +56,7 @@ title_basics %>%
   count("\\N")
 
 ```
-The min and max function show that there needs to be some data cleaning done.The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7210734 missing values. 
+The min and max function show that there needs to be some data cleaning done.The output returns 'character' as the data type of 'runtimeMinutes', while numeric makes more sense. The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7144426 missing values. 
 
 ### Average Rating 
 
@@ -78,22 +68,11 @@ summary(title_ratings$averageRating)
 head(title_ratings$averageRating)
 tail(title_ratings$averageRating)
 mean(title_ratings$averageRating)
-median(title_ratings$averageRating)
-```
-Looking at the output, the range for 'averageRating' is 1-10. 
-master
-
-## Generating tables
-```{r tables, echo=False}
 table(title_ratings$averageRating)
-table(title_basics$runtimeMinutes)
-table(title_ratings$averageRating, title_basics$runtimeMinutes)
-
 ```
-
+Looking at the output, the range for 'averageRating' is 1-10.There seem to be no missing values. 
 
 ## Generating plots
-```{r plots, echo=FALSE}
-plot(x=title_basics$runtimeMinutes, y=title_ratings$averageRating)
-plot(x=title_basics$runtimeMinutes, y=title_ratings$numVotes)
+```{r plots, echo=FALSE, message=FALSE}
 
+```
