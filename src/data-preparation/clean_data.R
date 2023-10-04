@@ -4,16 +4,17 @@ library(tidyverse)
 
 ## INPUT
 # Load merged data 
-read_csv("../../gen/data-preparation/temp/data_merged.csv")
+data_cleaned <- read_csv("gen/data-preparation/temp/data_merged.csv")
 
 ## TRANSFORMATION
 # Filter title_basics by movie and create a new variable data_cleaned
-data_cleaned <- combined_data %>% 
+data_cleaned <- data_cleaned %>% 
   filter(titleType == "movie")
 
-#Rename tconst to title_id
+#Rename tconst to title_id and startYear to year
 data_cleaned <- data_cleaned %>% 
-  rename(title_id = tconst)
+  rename(title_id = tconst) %>%
+  rename(year = startYear)
 
 # Remove endYear as there is no data in this column for movies
 data_cleaned <- data_cleaned %>%
@@ -24,18 +25,22 @@ data_cleaned <- data_cleaned %>%
   mutate(
     titleType = as.factor(titleType),
     isAdult = as.logical(isAdult),
-    startYear = as.factor(startYear),
+    year = as.factor(year),
     runtimeMinutes = as.integer(runtimeMinutes),
     averageRating = as.numeric(averageRating),
     numVotes = as.integer(numVotes)
   )
 
-# Recode missing values '\N' to 'NA' and remove missing values of primaryTitle, originalTitle, runtimeMinutes and averageRating
-data_cleaned <- data_cleaned %>% mutate_all(~ifelse(. == "\\N", NA, .)) %>% drop_na(c("primaryTitle", "originalTitle", "runtimeMinutes", "averageRating"))
+#Remove missing observations from runtimeMinutes and averageRating
+data_cleaned <- data_cleaned %>%
+  filter(!is.na(runtimeMinutes) & !is.na(averageRating))
+
+#Remove movies with a run time longer than 5 hours (300 minutes) to remove outliers
+data_cleaned <- data_cleaned %>%
+  filter(runtimeMinutes <= 300)
 
 # Add new variable that shows whether a movie is classified as "short" or "long" based on average runtime
 average_runtime <- mean(data_cleaned$runtimeMinutes, na.rm = TRUE)
-
 data_cleaned <- data_cleaned %>%
   mutate(runtime_long_short = ifelse(runtimeMinutes > average_runtime, "long", "short"))
 
@@ -47,9 +52,6 @@ rating_standardized <- (data_cleaned$averageRating - mean_rating) / sd_rating
 data_cleaned <- data_cleaned %>%
   mutate(rating_standardized = round(rating_standardized, digits = 3))
 
-#Remove duplicates 
-data_cleaned <- data_cleaned %>% filter(!duplicated(data_cleaned))
-
 ## OUTPUT
 # Save cleaned data
-write_csv(data_cleaned,file="../../gen/data-preparation/temp/data_cleaned.csv")
+write_csv(data_cleaned,file="gen/data-preparation/temp/data_cleaned.csv")
