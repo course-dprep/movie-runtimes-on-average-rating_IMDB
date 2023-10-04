@@ -1,5 +1,4 @@
 ## SETUP
-library(dplyr)
 library(tidyverse)
 
 ## INPUT
