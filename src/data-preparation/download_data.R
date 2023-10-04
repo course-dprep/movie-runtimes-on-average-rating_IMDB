@@ -1,6 +1,4 @@
-## SETUP
-library(dplyr)
-library(tidyverse)
+# INPUT & TRANSFORMATION
 
 #Create a function download_data which downloads files from URLs. 
 #Downloaded data assigned filename, storage path, and URL. 
@@ -17,5 +15,5 @@ download_data <- function(url, filename, filepath) {
 # OUTPUT
 
 #Use the function to download the datasets from IMDB and put into correct location
-download_data(url = "https://datasets.imdbws.com/title.basics.tsv.gz", filename = "title_basics.tsv", filepath = "../../data/dataset")
-download_data(url = "https://datasets.imdbws.com/title.ratings.tsv.gz", filename = "title_ratings.tsv", filepath = "../../data/dataset")
+download_data(url = "https://datasets.imdbws.com/title.basics.tsv.gz", filename = "title_basics.tsv", filepath = "data/dataset")
+download_data(url = "https://datasets.imdbws.com/title.ratings.tsv.gz", filename = "title_ratings.tsv", filepath = "data/dataset")
