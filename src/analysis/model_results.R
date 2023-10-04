@@ -1,27 +1,34 @@
-
 ## SETUP
 library(dplyr)
 library(car)
+library(lmtest)
 
 ## INPUT
 read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 
 ## TRANSFORMATION
-## Linear regression
+## Simple linear regression
 # Research question: What is the relationship between the runtime and average user rating for movies?
 imdb_lm1 <- lm(averageRating ~ runtimeMinutes , data_cleaned)
+summary(imdb_lm1)
+
+## Linear regression including potential confounders
+# Confounder: number of votes (numVotes)
+imdb_lm2 <- lm(averageRating ~ runtimeMinutes + numVotes , data_cleaned)
+summary(imdb_lm2)
 
 # Assumption check: test for homoskedasticity
-leveneTest(averageRating ~ runtimeMinutes, mergeddata, center=mean) # significant p-value means violated assumption of homoskedasticity
+breuschpagan_test <- lm(averageRating ~ runtimeMinutes, data = data_cleaned) %>% bptest()
+breuschpagan_test
 
 # Assumption check: test for independence of observations
-dwtest(lm1) # a value near 2 suggests independence
+dwtest(imdb_lm1) # a value near 2 suggests independence
 
 # Assumption check: test for normality
-shapiro.test(lm1$residuals) # assumption of normality is violated if p-value is significant
+qqnorm(data_cleaned$averageRating) # relatively straight line indicates normality
 
 # Assumption check: test for linearity
-plot(lm1, which = 1)
+plot(data_cleaned$runtimeMinutes, data_cleaned$averageRating, xlab = "Runtime Minutes", ylab = "Average Rating", main = "Scatterplot of Average Rating vs. Runtime Minutes")
 
 ## OUTPUT
 # Save output
