@@ -46,6 +46,8 @@ For R, the following packages are used:
 ```
 install.packages(dplyr)
 install.packages(tidyverse)
+install.packages(car)
+install.packages(lmtest)
 ```
 
 ## __Running instructions__
