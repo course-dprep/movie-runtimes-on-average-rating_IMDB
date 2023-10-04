@@ -27,16 +27,18 @@ To analyse the data the program Rstudio was used. After downloading the data int
 Insert later: program(s) used, type of analysis, what did we do to clean and merge data
 
 ## __Repository overview__
-├── README.md <br>
-├── data <br>
-├── gen <br>
-│   ├── analysis <br>
-│   ├── data-preparation <br>
-│   └── paper <br>
-└── src <br>
-    ├── analysis <br>
-    ├── data-preparation <br>
-    └── paper <br>
+```
+├── README.md 
+├── data 
+├── gen 
+│   ├── analysis 
+│   ├── data-preparation 
+│   └── paper 
+└── src 
+    ├── analysis 
+    ├── data-preparation 
+    └── paper 
+```
 
 ## __Prerequisites__
 - R [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
