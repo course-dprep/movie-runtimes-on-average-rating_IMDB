@@ -72,7 +72,14 @@ table(title_ratings$averageRating)
 ```
 Looking at the output, the range for 'averageRating' is 1-10.There seem to be no missing values. 
 
+
+To improve our understanding of the relevant variables, they are visualized using varying plots below. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
 ## Generating plots
 ```{r plots, echo=FALSE, message=FALSE}
+boxplot(title_basics$runtimeMinutes)
+boxplot(title_ratings$averageRating)
+boxplot(title_ratings$numVotes)
+plot(title_ratings$averageRating, title_ratings$numVotes)
+plot(title_basics$genres, title_basics$runtimeMinutes)
 
 ```
