@@ -1,7 +1,8 @@
 ---
 title: "Data exploration"
 output: html_document
-date: "2023-09-17"
+output_dir: ../../gen/analysis/output/Data_exploration_RMarkdown.Rmd
+date: "`r Sys.Date()`"
 ---
 In this document, we will explore the data of two IMDB datasets, to answer our research question: 'Does the run time of movies influence the average rating of that movie?'
 
@@ -83,3 +84,5 @@ plot(title_ratings$averageRating, title_ratings$numVotes)
 plot(title_basics$genres, title_basics$runtimeMinutes)
 
 ```
+
+
