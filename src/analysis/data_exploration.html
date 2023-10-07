@@ -369,6 +369,12 @@ will specificially look at movies later on.</p></li>
 <li><p><strong>averageRating</strong> from the title_ratings
 dataset.</p></li>
 </ul>
+<p>Next to that, we will some extra variables, that might be used as
+covariates in our analysis.</p>
+<ul>
+<li><strong>numVotes</strong> from the title_ratings dataset</li>
+<li><strong>startYear</strong> from the title_basics dataset</li>
+</ul>
 <div id="titletype" class="section level3">
 <h3>titleType</h3>
 <p>First of all, the different types of titles are explored. This
@@ -424,7 +430,7 @@ variable refers to the primary run time of the title, in minutes.</p>
 ## 10 101            &quot;\\N&quot;      5077
 ## # ℹ 890 more rows</code></pre>
 <p>The min and max function show that there needs to be some data
-cleaning done.The output returns ‘character’ as the data tpe of
+cleaning done.The output returns ‘character’ as the data type of
 ‘runtimeMinutes’, while numeric makes more sense. The max value that is
 returned is ‘Talk-show’, which clearly is not possible. Next to that,
 there seem to be quite some values missing for the running time. The
@@ -432,9 +438,9 @@ last page of the tibble shows that there are 7144426 missing values.</p>
 </div>
 <div id="average-rating" class="section level3">
 <h3>Average Rating</h3>
-<p>Lastly, the variable ‘averageRating’ is explored, which can be found
-in the ‘title_ratings’ dataset. The average rating is the weighted
-average of all individual user ratings.</p>
+<p>Next, the variable ‘averageRating’ is explored, which can be found in
+the ‘title_ratings’ dataset. The average rating is the weighted average
+of all individual user ratings.</p>
 <pre class="r"><code>summary(title_ratings$averageRating)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   1.000   6.200   7.200   6.959   7.900  10.000</code></pre>
@@ -463,9 +469,61 @@ average of all individual user ratings.</p>
 <p>Looking at the output, the range for ‘averageRating’ is 1-10.There
 seem to be no missing values.</p>
 </div>
+<div id="numvotes" class="section level3">
+<h3>numVotes</h3>
+<p>We will explore the number of votes per title type as well, as this
+is highly related to the average rating that is given.</p>
+<pre class="r"><code>summary(title_ratings$numVotes)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       5      11      26    1040     101 2802850</code></pre>
+<pre class="r"><code>head(title_ratings$numVotes)</code></pre>
+<pre><code>## [1] 1996  268 1883  177 2669  182</code></pre>
+<pre class="r"><code>tail(title_ratings$numVotes)</code></pre>
+<pre><code>## [1]  6 11 22 36  6  6</code></pre>
+<p>As can be seen in the output, there is quite some fluctuation in the
+amount of reviews that a title gets. This is relevant information to
+take into account, as it will directly influence the reliability of the
+average rating.</p>
+</div>
+<div id="startyear" class="section level3">
+<h3>startYear</h3>
+<p>The start year represents the year in which the title was first
+released.</p>
+<pre class="r"><code>summary(title_basics$startYear)</code></pre>
+<pre><code>##    Length     Class      Mode 
+##  10204071 character character</code></pre>
+<pre class="r"><code>min(title_basics$startYear)</code></pre>
+<pre><code>## [1] &quot;\\N&quot;</code></pre>
+<pre class="r"><code>max(title_basics$startYear)</code></pre>
+<pre><code>## [1] &quot;2031&quot;</code></pre>
+<pre class="r"><code>unique(title_basics$startYear)</code></pre>
+<pre><code>##   [1] &quot;1894&quot; &quot;1892&quot; &quot;1893&quot; &quot;1895&quot; &quot;1896&quot; &quot;1898&quot; &quot;1897&quot; &quot;1900&quot; &quot;1899&quot; &quot;1901&quot;
+##  [11] &quot;1902&quot; &quot;1903&quot; &quot;1905&quot; &quot;1904&quot; &quot;1912&quot; &quot;1907&quot; &quot;1906&quot; &quot;1908&quot; &quot;1910&quot; &quot;1909&quot;
+##  [21] &quot;\\N&quot;  &quot;1990&quot; &quot;1914&quot; &quot;1911&quot; &quot;1913&quot; &quot;1915&quot; &quot;1919&quot; &quot;1916&quot; &quot;1917&quot; &quot;1918&quot;
+##  [31] &quot;1936&quot; &quot;1925&quot; &quot;1920&quot; &quot;1922&quot; &quot;1921&quot; &quot;1923&quot; &quot;1924&quot; &quot;1928&quot; &quot;2019&quot; &quot;2021&quot;
+##  [41] &quot;1926&quot; &quot;1927&quot; &quot;1929&quot; &quot;2000&quot; &quot;1993&quot; &quot;1935&quot; &quot;1930&quot; &quot;1942&quot; &quot;1934&quot; &quot;1931&quot;
+##  [51] &quot;1932&quot; &quot;1939&quot; &quot;1937&quot; &quot;1933&quot; &quot;1950&quot; &quot;1938&quot; &quot;1951&quot; &quot;1945&quot; &quot;1946&quot; &quot;1940&quot;
+##  [61] &quot;1944&quot; &quot;1949&quot; &quot;1947&quot; &quot;1941&quot; &quot;1952&quot; &quot;1970&quot; &quot;1957&quot; &quot;1943&quot; &quot;1959&quot; &quot;1948&quot;
+##  [71] &quot;2001&quot; &quot;1994&quot; &quot;1953&quot; &quot;1954&quot; &quot;1965&quot; &quot;1983&quot; &quot;1980&quot; &quot;1973&quot; &quot;1961&quot; &quot;1995&quot;
+##  [81] &quot;1955&quot; &quot;1962&quot; &quot;1958&quot; &quot;1956&quot; &quot;1960&quot; &quot;1977&quot; &quot;1964&quot; &quot;2012&quot; &quot;1967&quot; &quot;1968&quot;
+##  [91] &quot;1963&quot; &quot;1988&quot; &quot;1986&quot; &quot;1971&quot; &quot;1969&quot; &quot;1972&quot; &quot;1966&quot; &quot;1976&quot; &quot;1979&quot; &quot;2016&quot;
+## [101] &quot;2020&quot; &quot;1974&quot; &quot;1978&quot; &quot;1981&quot; &quot;1975&quot; &quot;1989&quot; &quot;2014&quot; &quot;1985&quot; &quot;1987&quot; &quot;2010&quot;
+## [111] &quot;2018&quot; &quot;1984&quot; &quot;1992&quot; &quot;2023&quot; &quot;1982&quot; &quot;1991&quot; &quot;2022&quot; &quot;2008&quot; &quot;1999&quot; &quot;2005&quot;
+## [121] &quot;2003&quot; &quot;1998&quot; &quot;2002&quot; &quot;1997&quot; &quot;2009&quot; &quot;2004&quot; &quot;1996&quot; &quot;2017&quot; &quot;2006&quot; &quot;2013&quot;
+## [131] &quot;2015&quot; &quot;2007&quot; &quot;2011&quot; &quot;1891&quot; &quot;2024&quot; &quot;1888&quot; &quot;1890&quot; &quot;1889&quot; &quot;2025&quot; &quot;2026&quot;
+## [141] &quot;2027&quot; &quot;1878&quot; &quot;2030&quot; &quot;2028&quot; &quot;1877&quot; &quot;1882&quot; &quot;1881&quot; &quot;1887&quot; &quot;2029&quot; &quot;1874&quot;
+## [151] &quot;1883&quot; &quot;2031&quot; &quot;1885&quot;</code></pre>
+<p>The output shows that the titles fall in the range of 1874-2031. This
+means that the data set also contains titles of movies that have not
+been released, or that there needs to be some data cleaning done.</p>
+</div>
 </div>
 <div id="generating-plots" class="section level2">
 <h2>Generating plots</h2>
+<p>To improve our understanding of the relevant variables, they are
+visualized using varying plots below. From the boxplots, we can identify
+any outliers that need to be addressed during the data cleaning
+process.</p>
 </div>
 
 
