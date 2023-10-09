@@ -38,7 +38,7 @@ tail(title_basics$titleType)
 table(title_basics$titleType)
 
 ```
-As can be read from the output, there are 11 different types of titles. For the type 'movie', there are 658476 observations.
+As can be read from the output, there are 11 different types of titles. For the type 'movie', there are 658,476 observations.
 
 ### RuntimeMinutes 
 
@@ -57,7 +57,7 @@ title_basics %>%
   count("\\N")
 
 ```
-The min and max function show that there needs to be some data cleaning done.The output returns 'character' as the data type of 'runtimeMinutes', while numeric makes more sense. The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7144426 missing values. 
+The min and max function show that there needs to be some data cleaning done.The output returns 'character' as the data type of 'runtimeMinutes', while numeric makes more sense. The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7,144,426 missing values. 
 
 ### Average Rating 
 
@@ -74,15 +74,21 @@ table(title_ratings$averageRating)
 Looking at the output, the range for 'averageRating' is 1-10.There seem to be no missing values. 
 
 
-To improve our understanding of the relevant variables, they are visualized using varying plots below. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
+To improve our understanding of the above mentioned variables, they are visualized using varying plots below. We start this section by creating boxplots for the individual variables. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
+Further, we create scatterplots to show the relationship between the continuous variables in the datasets. Due to the different sizes of the title_basics and title_ratings datasets (10,194,391 and 1,352,987 observations, respectively), we only visualize the relationship between two variables in the same dataset.  
 ## Generating plots
 ```{r plots, echo=FALSE, message=FALSE}
-boxplot(title_basics$runtimeMinutes)
-boxplot(title_ratings$averageRating)
-boxplot(title_ratings$numVotes)
-plot(title_ratings$averageRating, title_ratings$numVotes)
-plot(title_basics$genres, title_basics$runtimeMinutes)
+title_basics$runtimeMinutes <- as.numeric(title_basics$runtimeMinutes)
+title_basics$startYear <- as.numeric(title_basics$startYear)
+boxplot(title_basics$runtimeMinutes, ylab = 'runtimeMinutes')
+boxplot(title_ratings$averageRating, ylab = 'averageRating')
+boxplot(title_ratings$numVotes, ylab = 'numVotes')
+boxplot(title_basics$startYear, ylab ='startYear')
+plot(title_ratings$averageRating, title_ratings$numVotes, ylab='numVotes' , xlab='averageRating')
+plot(title_basics$startYear, title_basics$runtimeMinutes, ylab='runtimeMinutes' , xlab='startYear')
 
 ```
+The boxplot that visualizes the variable 'runtimeMinutes' shows that there are a few outliers. These observations include movies that are over 30,000 minutes long (or more than 20 days). For the number of votes (numVotes) and the average rating (averageRating) we do not identify any problematic outliers. 
 
+The scatterplot between the average rating and the number of votes indicates a positive relationship between the two variables. This relationship, however, is not linear. Due to the outliers in the runtime variable, it is difficult to identify a relationship between the startYear and runtimeMinutes variables.
 
