@@ -20,16 +20,23 @@ summary(imdb_lm2)
 # Assumption check: test for homoskedasticity
 breuschpagan_test <- imdb_lm2 %>% bptest()
 breuschpagan_test
+# We reject the null-hypothesis that there is constant variance and identify the presence of heteroskedasticity in our data.
+# For future research, we suggest using robust standard errors when working with the data. 
 
 
 # Assumption check: test for independence of observations
+dwtest(imdb_lm1) # a value near 2 suggests independence
+# The Durbin-Watsen statistic is 1.9367 and the p-value is significant at the 0.05 level. This suggests that there is no autocorrelation in the residuals. 
+
 dwtest(imdb_lm2) # a value near 2 suggests independence
 
-# Assumption check: test for normality in dependent variable
-qqnorm(data_cleaned$averageRating) # relatively straight line indicates normality
+# Assumption check: test for normality
+qqnorm(data_cleaned$averageRating) 
+# The relatively straight line indicates normality
 
 # Assumption check: test for linearity between dependent variable and main independet variable
 plot(data_cleaned$runtimeMinutes, data_cleaned$averageRating, xlab = "Runtime Minutes", ylab = "Average Rating", main = "Scatterplot of Average Rating vs. Runtime Minutes")
+# The resulting plot suggests no problematic multicollinearity. 
 
 ## OUTPUT
 # Save output
