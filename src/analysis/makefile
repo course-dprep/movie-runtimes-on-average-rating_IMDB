@@ -1,8 +1,5 @@
 all: ../../gen/analysis/output/model_results.R data_exploration.html
 
-clean:
-	R -e "unlink('*.html')"
-
 data_exploration.html: data_exploration.Rmd
 	Rscript data_exploration.Rmd
 	
