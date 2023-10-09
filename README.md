@@ -60,6 +60,9 @@ For this project, we used the following resources:
 - Course material from [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/) (Open Science course by dr. Hannes Datta)
 - Installation guides and Principles of Project Setup and Workflow Management from [Tilburg Science Hub](https://tilburgsciencehub.com/tutorials/reproducible-research-and-automation/principles-of-project-setup-and-workflow-management/project-setup-overview/)
 
+## __Last updated__
+9 October 2023
+
 ## __About__
 Thank you for your interest in our project! This project is part of our 'Data Preparation & Workflow Management' course at Tilburg University. The contributors are part of team 1, which consists of:
 - Lindsey Coover (l.e.coover@tilburguniversity.edu)
