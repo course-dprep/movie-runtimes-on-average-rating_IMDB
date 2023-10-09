@@ -24,6 +24,11 @@ We are going to be looking at three different variables:
 
 - **averageRating** from the title_ratings dataset. 
 
+Next to that, we will some extra variables, that might be used as covariates in our analysis. 
+
+- **numVotes** from the title_ratings dataset
+- **startYear** from the title_basics dataset 
+
 
 ### titleType
 
@@ -60,7 +65,7 @@ The min and max function show that there needs to be some data cleaning done.The
 
 ### Average Rating 
 
-Lastly, the variable 'averageRating' is explored, which can be found in the 'title_ratings' dataset. The average rating is the weighted average of all individual user ratings. 
+Next, the variable 'averageRating' is explored, which can be found in the 'title_ratings' dataset. The average rating is the weighted average of all individual user ratings. 
 
 ```{r Summary statistics for AverageRating, include = TRUE}
 
@@ -72,10 +77,29 @@ table(title_ratings$averageRating)
 ```
 Looking at the output, the range for 'averageRating' is 1-10.There seem to be no missing values. 
 
+### numVotes 
+We will explore the number of votes per title type as well, as this is highly related to the average rating that is given. 
 
-To improve our understanding of the relevant variables, they are visualized using varying plots below. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
+```{r Summary statistics for NumVotes, include = TRUE}
+summary(title_ratings$numVotes)
+head(title_ratings$numVotes)
+tail(title_ratings$numVotes)
+```
+As can be seen in the output, there is quite some fluctuation in the amount of reviews that a title gets. This is relevant information to take into account, as it will directly influence the reliability of the average rating. 
+
+### startYear 
+The start year represents the year in which the title was first released. 
+```{r Summary statistics for startYear, include = TRUE}
+summary(title_basics$startYear)
+min(title_basics$startYear)
+max(title_basics$startYear)
+unique(title_basics$startYear)
+```
+The output shows that the titles fall in the range of 1874-2031. This means that the data set also contains titles of movies that have not been released, or that there needs to be some data cleaning done. 
+
 ## Generating plots
-```{r plots, echo=FALSE, message=FALSE}
+To improve our understanding of the relevant variables, they are visualized using varying plots below. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
+```{r plots, echo=FALSE, message=FALSE, eval=FALSE}
 boxplot(title_basics$runtimeMinutes)
 boxplot(title_ratings$averageRating)
 boxplot(title_ratings$numVotes)
