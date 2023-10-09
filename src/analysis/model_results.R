@@ -2,9 +2,10 @@
 library(dplyr)
 library(car)
 library(lmtest)
+library(tidyverse)
 
 ## INPUT
-read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
+data_cleaned <- read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 
 ## TRANSFORMATION
 ## Simple linear regression

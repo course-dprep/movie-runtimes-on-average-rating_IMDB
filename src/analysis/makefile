@@ -1,4 +1,4 @@
-all: model_results.R
+all: ../../gen/analysis/output/model_results.R data_exploration.html
 
 clean:
 	R -e "unlink('*.html')"
@@ -6,5 +6,5 @@ clean:
 data_exploration.html: data_exploration.Rmd
 	Rscript data_exploration.Rmd
 	
-model_results.R: model_results.R
+../../gen/analysis/output/model_results.R: model_results.R ../../gen/data-preparation/temp/data_cleaned.csv
 	Rscript model_results.R
