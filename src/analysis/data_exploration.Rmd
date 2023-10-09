@@ -98,10 +98,9 @@ unique(title_basics$startYear)
 ```
 The output shows that the titles fall in the range of 1874-2031. This means that the data set also contains titles of movies that have not been released, or that there needs to be some data cleaning done. 
 
-<<<<<<< HEAD
+## Generating plots
 To improve our understanding of the above mentioned variables, they are visualized using varying plots below. We start this section by creating boxplots for the individual variables. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
 Further, we create scatterplots to show the relationship between the continuous variables in the datasets. Due to the different sizes of the title_basics and title_ratings datasets (10,194,391 and 1,352,987 observations, respectively), we only visualize the relationship between two variables in the same dataset.  
-## Generating plots
 ```{r plots, echo=FALSE, message=FALSE}
 title_basics$runtimeMinutes <- as.numeric(title_basics$runtimeMinutes)
 title_basics$startYear <- as.numeric(title_basics$startYear)
@@ -111,17 +110,6 @@ boxplot(title_ratings$numVotes, ylab = 'numVotes')
 boxplot(title_basics$startYear, ylab ='startYear')
 plot(title_ratings$averageRating, title_ratings$numVotes, ylab='numVotes' , xlab='averageRating')
 plot(title_basics$startYear, title_basics$runtimeMinutes, ylab='runtimeMinutes' , xlab='startYear')
-=======
-## Generating plots
-To improve our understanding of the relevant variables, they are visualized using varying plots below. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
-```{r plots, echo=FALSE, message=FALSE, eval=FALSE}
-boxplot(title_basics$runtimeMinutes)
-boxplot(title_ratings$averageRating)
-boxplot(title_ratings$numVotes)
-plot(title_ratings$averageRating, title_ratings$numVotes)
-plot(title_basics$genres, title_basics$runtimeMinutes)
->>>>>>> 9ddfaf83c83027790a5775ce4d78378ea0575e69
-
 ```
 The boxplot that visualizes the variable 'runtimeMinutes' shows that there are a few outliers. These observations include movies that are over 30,000 minutes long (or more than 20 days). For the number of votes (numVotes) and the average rating (averageRating) we do not identify any problematic outliers. 
 
