@@ -1,34 +1,87 @@
 ---
-title: "data_analysis"
+title: "The relationship between movie runtime and average user rating"
+subtitle: 
+author: "Lindsey Coover, Renee Minten, Marlie Snoeijen, Nikki Valen, Fleur van Vugt"
 output: pdf_document 
-
 ---
-```{r setup, include = FALSE, eval = FALSE}
+```{r setup_packages, include = FALSE, eval = FALSE}
+knitr::opts_chunk$set(warning = FALSE)
 #Include this line of code if you have not installed tinytex yet (change eval=FALSE TO eval=TRUE)
 tinytex:: install_tinytex() 
 ```
 
-```{r open library tinytext, inlude = FALSE}
-
+```{r setup_libraries, echo = FALSE, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE)
 library(tinytex)
+library(tidyverse)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r input_data, warning=FALSE, include=FALSE}
+title_basics <- read_tsv("../../data/dataset/title_basics.tsv")
+title_ratings <- read_tsv("../../data/dataset/title_ratings.tsv")
+data_cleaned <- read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 ```
 
-## Including Plots
+# Introduction
 
-You can also embed plots, for example:
+The average length of the ten highest-grossing movies in North America is slightly over two hours (Statista, 2023). This is notable, since survey results among British residents suggest that the ideal length for a movie is under two hours (Dahlgreen, 2015). This prompts the question whether there is a relationship between the runtime of a movie and its success. This research therefore addresses this problem by analyzing data on movie runtimes and their average user ratings. The specific research question addressed in this research is: _What is the relationship between the runtime and the average user rating for movies?_ Results from our analysis may be useful in the movie industry. With knowledge on the effect of the runtime on user rating, producers are able to improve a movie's popularity and therefore, profitability. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+More detailed information for this research project can be found on https://github.com/course-dprep/movie-runtimes-on-average-rating_IMDB. This repository includes a README.md with the project's goal, as well as the instructions and source code to replicate the data preparation and analysis. 
+
+This document is structured as follows. The following section explains the methods that have been used during this research. After, the results of the analysis are presented. Finally, the research question is answered in the conclusion. 
+
+# Data preparation
+
+To prepare the data for analysis, we have operationalized several methods. The steps that we have taken are summarized in the following sub-sections.
+
+## Raw data
+ This analysis uses two datasets that are publically available from IMDB. The dataset title_basics contains information on the title of the movie, the year it was released, the genre and the runtime in minutes. The title_ratings dataset consists of the average rating and the number of votes. Summary statistics for the relevant variables in our research are presented below. More information on the variables in our analysis can be found in the data_exploration.Rmd file. 
+```{r summary statistics, echo=FALSE, warning=FALSE, include=TRUE}
+summary(title_basics$runtimeMinutes)
+summary(title_basics$genres)
+summary(title_ratings$averageRating)
+summary(title_ratings$numVotes)
+summary(title_basics$startYear)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Merging process
+Subsequently, the columns from the two datasets were merged with a left_join function. This function retains all observations in the title_basics dataset and appends the observations from title_ratings dataset with matching instances. The merged dataset contains 10,194,391 observations.
+
+## Cleaning process
+The data cleaning process started with filtering the dataset for movies. Since our research is focused on movies, the observations with tvseries are irrelevant. After, we renamed several variables and removed an empty variable to improve the quality of the dataset. To allow for analysis later in the research, we also had to convert the classes of some variables. Next, the missing observations were removed for the variables _runtimeMinutes_ and _averageRating_. This decision is based on the fact that the research question is mainly based on these two variables. Unfortunately, this operation reduced the number of observations to 267,942. 
+The final part of the cleaning process consisted of removing outliers that could skew the results of the analysis. A review of the boxplots for the variables concluded that there are multiple movies with a relatively long runtime. This boxplot is showed below. Based on this plot, we decided to remove any movies with a runtime of more than 300 minutes (5 hours).  
+
+```{r plots, echo=FALSE, message=FALSE, warning=FALSE}
+title_basics$runtimeMinutes <- as.numeric(title_basics$runtimeMinutes)
+boxplot(title_basics$runtimeMinutes, ylab = 'runtimeMinutes')
+```
+More information on the operations used to clean the data can be found in the clean_data.R document. 
+
+# Analysis
+
+To estimate the relationship between the runtime of a movie and it's average user rating, we have performed simple linear regression. The analysis consists of two parts.
+
+## Binary linear regression
+First, the effect of the runtime on the average rating is estimated in a binary regression model. This model only includes the runtime as the independent variable. The output of the linear regression is presented below.
+```{r binary_regression_model, message=FALSE, echo=FALSE}
+imdb_lm1 <- lm(averageRating ~ runtimeMinutes , data_cleaned)
+summary(imdb_lm1)
+```
+The coefficient for the _runtimeMinutes_ variable is 0.0028217 and is significant at the 5% level. This implies a positive relationship between the runtime of a movie and it's average user rating.
+
+## Multiple linear regression
+To adjust for the effect of omitted variables in the binary regression model, we have also estimated a multiple regression model with several covariates. These covariates are the number of votes, the year the movie was released and whether the movie is adult-only. The results from this regression are visible in the following output. 
+```{r multiple_regression_model, message=FALSE, echo=FALSE}
+imdb_lm2 <- lm(averageRating ~ runtimeMinutes + numVotes + year + isAdult, data_cleaned)
+summary(imdb_lm2)
+```
+The coefficient for the runtime has decreased a little to 0.001963. The effect is still significant at the 5% level. The coefficients for the covariates are also significant at the five percent level.
+
+# Conclusion
+We can conclude that the runtime of a movie has a small, but positive effect on the user rating. 
+
+# References
+
+Dahlgreen, W. (September 26, 2015). Note to producers: the ideal movie length is under 2 hours. _YouGovUk_, retrieved from https://yougov.co.uk/society/articles/13396-note-producers-perfect-movie-length-under-2-hours?redirect_from=%2Ftopics%2Flifestyle%2Farticles-reports%2F2015%2F09%2F26%2Fnote-producers-perfect-movie-length-under-2-hours
+
+Statista Research Department. (January 5, 2023). Average length of the top 10 highest-grossing movies in the United States and Canada from 1980 to 2021. _Statista_, retrieved from https://www.statista.com/statistics/1292523/lenght-top-movies-us/
