@@ -65,13 +65,20 @@ _Optional:_ To clean up all raw and unnecessary data files created during the pi
 
 _Note:_ the pipeline process wil not work anymore once you close your command line/terminal.
 
+### Alternative way
+In case you wish to run the code in a more manual way, you can replace step 3 by running the code files in the order below:
+- ../src/data-prepraration/download_data.R
+- ../src/data-prepraration/merge_data.R
+- ../src/data-prepraration/clean_data.R
+- ../src/analysis/model_results.R
+
 ## __More resources__
 For this project, we used the following resources:
 - Course material from [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/) (Open Science course by dr. Hannes Datta)
 - Installation guides and Principles of Project Setup and Workflow Management from [Tilburg Science Hub](https://tilburgsciencehub.com/tutorials/reproducible-research-and-automation/principles-of-project-setup-and-workflow-management/project-setup-overview/)
 
 ## __Last updated__
-9 October 2023
+11 October 2023
 
 ## __About__
 Thank you for your interest in our project! This project is part of our 'Data Preparation & Workflow Management' course at Tilburg University. The contributors are part of team 1, which consists of:
