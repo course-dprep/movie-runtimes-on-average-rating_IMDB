@@ -53,7 +53,17 @@ install.packages(lmtest)
 ```
 
 ## __Running instructions__
-Insert later
+### __Step by step__
+In order to run the code of this project, please follow these instructions:
+
+_Step 1._ Fork this repository </br></br>
+_Step 2._ Open your command line / terminal and run the following code: </br>
+```git clone https://github.com/{your username}/movie-runtimes-on-average-rating_IMDB.git``` </br></br>
+_Step 3._ Set your working directory to movie-runtimes-on-average-rating_IMDB and run the following command: ```make``` </br>
+
+_Optional:_ To clean up all raw and unnecessary data files created during the pipeline process, run the following code in your command line / terminal: ```make clean```
+
+_Note:_ the pipeline process wil not work anymore once you close your command line/terminal.
 
 ## __More resources__
 For this project, we used the following resources:
