@@ -20,9 +20,7 @@ The variables that were used for the analysis of our research question, were the
 | runtimeMinutes | primary runtime of the title, in minutes |
 | averageRating | weighted average of all the indidivual user ratings |
 
-To analyse the data the program Rstudio was used. After downloading the data into Rstudio the two datasets were merged into one dataset, 'data_merged.csv'. This merged dataset was used when cleaning our data. After cleaning the data a data exploration was done using a Rmarkdown file. Lastly the data was analysed using a linear regression.  
-
-Insert later: what did we do to clean and merge data
+To analyse the data the program Rstudio was used. After downloading the data into Rstudio, the two datasets were merged into one dataset, 'data_merged.csv'. This merged dataset was used when cleaning our data. In cleaning the data, it was made sure that only movie data was left (e.g. excluding series), and observations with missing values for relevant variables (runtime and average rating) were removed. The dataset was extended with a variable that classifies movies as 'short' or 'long', and a variable that shows standardized ratings. Lastly, the analysis included assumption checks and the examination of the research question using a linear regression.  
 
 ## __Repository overview__
 ```
