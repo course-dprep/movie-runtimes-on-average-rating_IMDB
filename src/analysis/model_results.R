@@ -2,6 +2,7 @@
 library(dplyr)
 library(car)
 library(lmtest)
+library(tidyverse)
 
 ## INPUT
 data_cleaned <- read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
@@ -24,17 +25,19 @@ breuschpagan_test
 # For future research, we suggest using robust standard errors when working with the data. 
 
 
-# Assumption check: test for independence of observations
+# Assumption check: test for independence of observations in binary linear regression model
 dwtest(imdb_lm1) # a value near 2 suggests independence
-# The Durbin-Watsen statistic is 1.9367 and the p-value is significant at the 0.05 level. This suggests that there is no autocorrelation in the residuals. 
+# The Durbin-Wats0n statistic is 1.9163 and the p-value is significant at the 0.05 level. This suggests that there is no autocorrelation in the residuals. 
 
+# Assumption check: test for independence of observations in multiple linear regression model
 dwtest(imdb_lm2) # a value near 2 suggests independence
+# The Durbin-Wats0n statistic is 1.9237 and the p-value is significant at the 0.05 level. This suggests that there is no autocorrelation in the residuals. 
 
 # Assumption check: test for normality
 qqnorm(data_cleaned$averageRating) 
 # The relatively straight line indicates normality
 
-# Assumption check: test for linearity between dependent variable and main independet variable
+# Assumption check: test for linearity between dependent variable and main independent variable
 plot(data_cleaned$runtimeMinutes, data_cleaned$averageRating, xlab = "Runtime Minutes", ylab = "Average Rating", main = "Scatterplot of Average Rating vs. Runtime Minutes")
 # The resulting plot suggests no problematic multicollinearity. 
 
