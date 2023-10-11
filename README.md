@@ -1,19 +1,17 @@
 # **IMDB - the impact of runtime on average rating**
-
-*What is the relationship between the runtime and the average user rating for movies?*
+This project examines the relationship between the runtime and average rating of movies. We prepared IMDB data to analyze this.
 
 ## __Motivation__
 Movies have a range of different runtimes. The longest movie ever made was over 35 days long (Lyon, 2023), while one of the shortest movies ever made was only 100 seconds long (Acuna, 2014). Even though these movies are definitley exceptions when it comes to runtimes, it does show the big range that exists in the movie industry. According to Follows (2021) "half of all Hollywood movies are between 96 and 120 minutes long, with the most popular running time being 101 minutes". 
 
 __Relevance__
-
 We want to know if the length of the movie runtime influences peoples opinion (average rating) about the movie. The results of this project can give useful insights to, for example, movie production companies and streaming services, into how the run times of their movies affect ratings, and with that likely, the popularity and profitability of their movies.    
 
 ## __Method and results__
-For this research, the research question *What is the relationship between the runtime and the average user rating for movies?* was formulated. 
+For this research, the following research question was formulated: *What is the relationship between the runtime and the average user rating for movies?* 
 
 To answer this question we make use of data from imdb.com, in specific the datasets 'title_basics.tsv' and 'title_ratings.tsv', which were downloaded from the following website: https://datasets.imdbws.com. 
-The variables that were used, were the following:
+The variables that were used for the analysis of our research question, were the following:
 
 | Variable       | Description |
 |------------|-----|
