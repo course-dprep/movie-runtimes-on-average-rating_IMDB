@@ -78,8 +78,8 @@ For this project, we used the following resources:
 
 ## __About__
 Thank you for your interest in our project! This project is part of our 'Data Preparation & Workflow Management' course at Tilburg University. The contributors are part of team 1, which consists of:
-- Lindsey Coover (l.e.coover@tilburguniversity.edu)
-- Renée Minten (r.c.c.minten@tilburguniversity.edu)
-- Marlie Snoeijen (m.p.c.snoeijen@tilburguniversity.edu) 
-- Nikkie Valen (n.c.p.e.valen@tilburguniversity.edu)
-- Fleur van Vugt (f.e.v.vanvugt@tilburguniversity.edu)
+- [Lindsey Coover](https://github.com/lindseycoover) (l.e.coover@tilburguniversity.edu)
+- [Renée Minten](https://github.com/ReneeMinten) (r.c.c.minten@tilburguniversity.edu)
+- [Marlie Snoeijen](https://github.com/marliesnoeijen) (m.p.c.snoeijen@tilburguniversity.edu) 
+- [Nikkie Valen](https://github.com/NCPEValen) (n.c.p.e.valen@tilburguniversity.edu)
+- [Fleur van Vugt](https://github.com/fleurvanvugt) (f.e.v.vanvugt@tilburguniversity.edu)
