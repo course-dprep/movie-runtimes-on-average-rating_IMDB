@@ -1,10 +1,9 @@
 ## SETUP 
-library(dplyr)
 library(tidyverse)
 
 ## INPUT
 # Load merged data 
-data_cleaned <- read_csv("gen/data-preparation/temp/data_merged.csv")
+data_cleaned <- read_csv("../../gen/data-preparation/temp/data_merged.csv")
 
 ## TRANSFORMATION
 # Filter title_basics by movie and create a new variable data_cleaned
@@ -54,4 +53,4 @@ data_cleaned <- data_cleaned %>%
 
 ## OUTPUT
 # Save cleaned data
-write_csv(data_cleaned,file="gen/data-preparation/temp/data_cleaned.csv")
+write_csv(data_cleaned,file="../../gen/data-preparation/temp/data_cleaned.csv")

@@ -1,0 +1,117 @@
+---
+title: "Data exploration"
+output: html_document
+output_dir: ../../gen/analysis/output/Data_exploration_RMarkdown.Rmd
+date: "`r Sys.Date()`"
+---
+In this document, we will explore the data of two IMDB datasets, to answer our research question: 'Does the run time of movies influence the average rating of that movie?'
+
+```{r importing_data, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+# load the two separate datasets
+library(tidyverse)
+library(dplyr)
+
+title_basics <- read_tsv("../../data/dataset/title_basics.tsv")
+title_ratings <- read_tsv("../../data/dataset/title_ratings.tsv") 
+
+```
+
+## Summary of relevant variables
+We are going to be looking at three different variables:
+
+- **runtimeMinutes** from the title_basics dataset
+
+- **titleType** from the title_basics dataset, as we will specificially look at movies later on. 
+
+- **averageRating** from the title_ratings dataset. 
+
+Next to that, we will some extra variables, that might be used as covariates in our analysis. 
+
+- **numVotes** from the title_ratings dataset
+- **startYear** from the title_basics dataset 
+
+
+### titleType
+
+First of all, the different types of titles are explored. This variable refers to the type/format of the title (e.g. movie, short, tvseries, tvepisode, video etc). 
+
+```{r Summary statistics for titletype, include = TRUE}
+
+summary(title_basics$titleType)
+head(title_basics$titleType)
+tail(title_basics$titleType)
+table(title_basics$titleType)
+
+```
+As can be read from the output, there are 11 different types of titles. For the type 'movie', there are 658,476 observations.
+
+### RuntimeMinutes 
+
+Second of all, the run time is explored. As the name suggests, this variable refers to the primary run time of the title, in minutes.
+
+```{r Summary statistics for RuntimeMinutes, include = TRUE}
+
+summary(title_basics$runtimeMinutes)
+head(title_basics$runtimeMinutes)
+tail(title_basics$runtimeMinutes)
+min(title_basics$runtimeMinutes)
+max(title_basics$runtimeMinutes)
+
+title_basics %>%
+  group_by(runtimeMinutes) %>%
+  count("\\N")
+
+```
+The min and max function show that there needs to be some data cleaning done.The output returns 'character' as the data type of 'runtimeMinutes', while numeric makes more sense. The max value that is returned is 'Talk-show', which clearly is not possible. Next to that, there seem to be quite some values missing for the running time. The last page of the tibble shows that there are 7,144,426 missing values. 
+
+### Average Rating 
+
+Next, the variable 'averageRating' is explored, which can be found in the 'title_ratings' dataset. The average rating is the weighted average of all individual user ratings. 
+
+```{r Summary statistics for AverageRating, include = TRUE}
+
+summary(title_ratings$averageRating)
+head(title_ratings$averageRating)
+tail(title_ratings$averageRating)
+mean(title_ratings$averageRating)
+table(title_ratings$averageRating)
+```
+Looking at the output, the range for 'averageRating' is 1-10.There seem to be no missing values. 
+
+### numVotes 
+We will explore the number of votes per title type as well, as this is highly related to the average rating that is given. 
+
+```{r Summary statistics for NumVotes, include = TRUE}
+summary(title_ratings$numVotes)
+head(title_ratings$numVotes)
+tail(title_ratings$numVotes)
+```
+As can be seen in the output, there is quite some fluctuation in the amount of reviews that a title gets. This is relevant information to take into account, as it will directly influence the reliability of the average rating. 
+
+### startYear 
+The start year represents the year in which the title was first released. 
+```{r Summary statistics for startYear, include = TRUE}
+summary(title_basics$startYear)
+min(title_basics$startYear)
+max(title_basics$startYear)
+unique(title_basics$startYear)
+```
+The output shows that the titles fall in the range of 1874-2031. This means that the data set also contains titles of movies that have not been released, or that there needs to be some data cleaning done. 
+
+## Generating plots
+To improve our understanding of the above mentioned variables, they are visualized using varying plots below. We start this section by creating boxplots for the individual variables. From the boxplots, we can identify any outliers that need to be addressed during the data cleaning process. 
+Further, we create scatterplots to show the relationship between the continuous variables in the datasets. Due to the different sizes of the title_basics and title_ratings datasets (10,194,391 and 1,352,987 observations, respectively), we only visualize the relationship between two variables in the same dataset.  
+```{r plots, echo=FALSE, message=FALSE}
+title_basics$runtimeMinutes <- as.numeric(title_basics$runtimeMinutes)
+title_basics$startYear <- as.numeric(title_basics$startYear)
+boxplot(title_basics$runtimeMinutes, ylab = 'runtimeMinutes')
+boxplot(title_ratings$averageRating, ylab = 'averageRating')
+boxplot(title_ratings$numVotes, ylab = 'numVotes')
+boxplot(title_basics$startYear, ylab ='startYear')
+plot(title_ratings$averageRating, title_ratings$numVotes, ylab='numVotes' , xlab='averageRating')
+plot(title_basics$startYear, title_basics$runtimeMinutes, ylab='runtimeMinutes' , xlab='startYear')
+```
+The boxplot that visualizes the variable 'runtimeMinutes' shows that there are a few outliers. These observations include movies that are over 30,000 minutes long (or more than 20 days). For the number of votes (numVotes) and the average rating (averageRating) we do not identify any problematic outliers. 
+
+The scatterplot between the average rating and the number of votes indicates a positive relationship between the two variables. This relationship, however, is not linear. Due to the outliers in the runtime variable, it is difficult to identify a relationship between the startYear and runtimeMinutes variables.
+
