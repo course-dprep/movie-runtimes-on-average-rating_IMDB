@@ -11,8 +11,8 @@ In this document, we will explore the data of two IMDB datasets, to answer our r
 library(tidyverse)
 library(dplyr)
 
-title_basics <- read_tsv("../../data/dataset/title_basics.tsv")
-title_ratings <- read_tsv("../../data/dataset/title_ratings.tsv") 
+title_basics <- read_tsv("../../data/datasets/title_basics.tsv")
+title_ratings <- read_tsv("../../data/datasets/title_ratings.tsv") 
 
 ```
 

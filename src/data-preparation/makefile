@@ -1,7 +1,7 @@
 # OVERALL BUILD RULES
 
-all: download data_exploration merge clean_data
-clean_data: ../../gen/data-preparation/temp/data_cleaned.csv
+all: download data_exploration merge cleandata
+cleandata: ../../gen/data-preparation/temp/data_cleaned.csv
 merge: ../../gen/data-preparation/temp/data_merged.csv
 data_exploration: ../../gen/data-preparation/output/data_exploration.html
 download: ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings.tsv
@@ -24,6 +24,3 @@ download: ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings
 ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings.tsv: download_data.R 
 	Rscript download_data.R 
 
-# Clean-up: Deletes temporary files
-clean: 
-	Rscript --vanilla ../clean-up.R
