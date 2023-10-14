@@ -46,10 +46,10 @@ We can conclude from our analysis that the run time of a movie has a small, but 
 - R [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
 - For R, make sure you have the following packages installed (if not: copy this code and run it in R to install them):
 ```
-install.packages(dplyr)
-install.packages(tidyverse)
-install.packages(car)
-install.packages(lmtest)
+install.packages('dplyr')
+install.packages('tidyverse')
+install.packages('car')
+install.packages('lmtest')
 tinytex::install_tinytex() 
 ```
 - Make [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
