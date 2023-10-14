@@ -62,8 +62,9 @@ In order to run the code of this project, please follow these instructions:
 _Step 1._ Make sure you meet all of the prerequisites above. </br></br>
 _Step 2._ Fork this repository. </br></br>
 _Step 3._ Open the command line / terminal and run the following code: </br>
-```git clone https://github.com/{your username}/movie-runtimes-on-average-rating_IMDB.git``` </br></br>
-_Step 4._ Set working directory to movie-runtimes-on-average-rating_IMDB and run the following command: ```make``` </br>
+```git clone https://github.com/{your username}/movie-runtimes-on-average-rating_IMDB.git``` </br>
+Don't forget to change ```{your username}``` to your github username. </br></br>
+_Step 4._ Set your working directory to movie-runtimes-on-average-rating_IMDB and run the following command: ```make``` </br>
 
 _Optional:_ To clean up all raw and unnecessary data files created during the pipeline process, run the following code in your command line / terminal: ```make clean```
 
