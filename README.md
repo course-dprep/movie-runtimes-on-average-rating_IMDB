@@ -66,7 +66,7 @@ _Step 3._ Set working directory to movie-runtimes-on-average-rating_IMDB and run
 
 _Optional:_ To clean up all raw and unnecessary data files created during the pipeline process, run the following code in your command line / terminal: ```make clean```
 
-_Note:_ the pipeline process wil not work anymore once you close your command line/terminal.
+_Note:_ the pipeline process will not work anymore once you close your command line/terminal.
 
 ### Alternative way
 In case you wish to run the code in a more manual way, you can replace step 3 by running the code files in the order below:
