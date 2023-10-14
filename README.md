@@ -16,7 +16,7 @@ The variables that were used for the analysis of our research question, were the
 
 | Variable       | Description |
 |------------|-----|
-| titleType | the type/format of the title (e.g. movie, sohrt, tvseries, tvepisode, video, etc.  |
+| titleType | the type/format of the title (e.g. movie, short, tvseries, tvepisode, video, etc.  |
 | runtimeMinutes | primary runtime of the title, in minutes |
 | averageRating | weighted average of all the indidivual user ratings |
 | numVotes | Number of votes the title has received |
