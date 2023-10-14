@@ -44,10 +44,7 @@ We can conclude from our analysis that the run time of a movie has a small, but 
 
 ## __Prerequisites__
 - R [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
-- Make [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
-- Pandoc [Installation Guide](https://pandoc.org/installing.html)
-
-In R, the following packages are used:
+- For R, make sure you have the following packages installed (if not: copy this code and run it in R to install them):
 ```
 install.packages(dplyr)
 install.packages(tidyverse)
@@ -55,15 +52,18 @@ install.packages(car)
 install.packages(lmtest)
 tinytex::install_tinytex() 
 ```
+- Make [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
+- Pandoc [Installation Guide](https://pandoc.org/installing.html)
 
 ## __Running instructions__
 ### __Step by step__
 In order to run the code of this project, please follow these instructions:
 
-_Step 1._ Fork this repository </br></br>
-_Step 2._ Open the command line / terminal and run the following code: </br>
+_Step 1._ Make sure you meet all of the prerequisites above. </br></br>
+_Step 2._ Fork this repository. </br></br>
+_Step 3._ Open the command line / terminal and run the following code: </br>
 ```git clone https://github.com/{your username}/movie-runtimes-on-average-rating_IMDB.git``` </br></br>
-_Step 3._ Set working directory to movie-runtimes-on-average-rating_IMDB and run the following command: ```make``` </br>
+_Step 4._ Set working directory to movie-runtimes-on-average-rating_IMDB and run the following command: ```make``` </br>
 
 _Optional:_ To clean up all raw and unnecessary data files created during the pipeline process, run the following code in your command line / terminal: ```make clean```
 
