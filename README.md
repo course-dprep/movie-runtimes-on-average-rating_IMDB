@@ -70,7 +70,7 @@ _Optional:_ To clean up all raw and unnecessary data files created during the pi
 _Note:_ the pipeline process will not work anymore once you close your command line/terminal.
 
 ### Alternative way
-In case you wish to run the code in a more manual way, you can replace step 3 by running the code files in the order below:
+In case you wish to run the code in a more manual way, you can replace step 4 by running the code files in the order below:
 - ../src/data-preparation/download_data.R
 - ../src/data-preparation/merge_data.R
 - ../src/data-preparation/clean_data.R
