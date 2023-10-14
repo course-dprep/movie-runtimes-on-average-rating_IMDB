@@ -39,6 +39,7 @@ To analyse the data the program Rstudio was used. After downloading the data int
 ## __Prerequisites__
 - R [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
 - Make [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
+- Pandoc [Installation Guide](https://pandoc.org/installing.html)
 
 For R, the following packages are used:
 ```
