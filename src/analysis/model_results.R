@@ -44,3 +44,4 @@ plot(data_cleaned$runtimeMinutes, data_cleaned$averageRating, xlab = "Runtime Mi
 ## OUTPUT
 # Save output
 save(imdb_lm1,file="../../gen/analysis/output/model_results.R")
+

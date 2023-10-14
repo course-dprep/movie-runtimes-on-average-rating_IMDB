@@ -12,6 +12,3 @@ unlink(paste(getwd(),'../gen/data-preparation/temp/*',sep=''),recursive=T,force=
 unlink(paste(getwd(),'../gen/paper/temp/*',sep=''),recursive=T,force=T)
 unlink(paste(getwd(),'../data/dataset/*',sep=''),recursive=T,force=T)
 
-# Delete temporary (hidden) R files
-file.remove('.RData')
-file.remove('.Rhistory')
