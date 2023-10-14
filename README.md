@@ -52,8 +52,8 @@ In R, the following packages are used:
 install.packages(dplyr)
 install.packages(tidyverse)
 install.packages(car)
-install.packages(tinytex) 
 install.packages(lmtest)
+tinytex::install_tinytex() 
 ```
 
 ## __Running instructions__
