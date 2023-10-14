@@ -1,8 +1,9 @@
 # OVERALL BUILD RULES
 
-all: download merge clean_data
+all: download data_exploration merge clean_data
 clean_data: ../../gen/data-preparation/temp/data_cleaned.csv
 merge: ../../gen/data-preparation/temp/data_merged.csv
+data_exploration: ../../gen/data-preparation/output/data_exploration.html
 download: ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings.tsv
 
 # INDIVIDUAL RECIPES
@@ -14,6 +15,10 @@ download: ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings
 # Merge data
 ../../gen/data-preparation/temp/data_merged.csv: merge_data.R ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings.tsv
 	Rscript merge_data.R
+	
+# Explore raw dataset
+../../gen/data-preparation/output/data_exploration.html: data_exploration.Rmd
+	R -e "rmarkdown:: render('data_exploration.Rmd', output_dir= '../../gen/data-preparation/output/')"
 	
 # Download data	
 ../../data/datasets/title_basics.tsv ../../data/datasets/title_ratings.tsv: download_data.R 
