@@ -9,6 +9,7 @@ It is interesting to assess whether the length of the movie influences a user's 
 
 ## __Method and results__
 For this research, the following research question was formulated: *What is the relationship between the runtime and the average user rating for movies?* 
+The research method in this analysis is linear regression. Linear regression is a statistical method that scientifically estimates the relationship between two variables. Therefore, it is well suited to use in our analysis with respect to the relationship between the runtime and the average user rating of a movie. 
 
 To answer this question we make use of data from imdb.com, specifically the datasets 'title_basics.tsv' and 'title_ratings.tsv', which were downloaded from the following website: https://datasets.imdbws.com. 
 The variables that were used for the analysis of our research question, were the following:
@@ -23,6 +24,9 @@ The variables that were used for the analysis of our research question, were the
 | startYear | represents the release year of a title |
 
 To analyse the data the program Rstudio was used. After downloading the data into Rstudio, the two datasets were merged into one dataset, 'data_merged.csv'. This merged dataset was used when cleaning our data. During the data-cleaning process, we only retained data for movies and excludes tv series. Further, observations with missing values for the relevant variables in this research were removed. The dataset was extended with a variable that classifies movies as 'short' or 'long', and a variable that shows standardized ratings. Finally, the analysis included assumption checks and the examination of the research question using a linear regression.  
+
+## __Conclusion__
+We can conclude from our analysis that the run time of a movie has a small, but positive effect on the average rating. This suggests that a longer movie receives a higher average rating. As this effect is relatively small, it is important to take limitations and suggestions for further research into account. Firstly, there might be cultural differences in the perception of an 'ideal run time'. Further research could focus on average ratings from specific countries, continents or cultures, to see if there is a difference amongst them. Next to that, run time is probably not the most important factor for consumers in rating a certain movie. The narrative of the movie and the acting are factors that play a more important role. However, these factors are more difficult to quantify and were not available in the dataset.  
 
 ## __Repository overview__
 ```
